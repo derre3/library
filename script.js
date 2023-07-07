@@ -15,7 +15,7 @@ let myLib = [
 function addBook() {
     let newBook = new Book(title, author, pages, read);
     myLib.push(newBook);
-    displayCards();
+    displayCard(newBook);
     return `${newBook.title} added to library`
 }
 
@@ -23,41 +23,48 @@ function getBook() {
     title = prompt('Title');
     author = prompt('Author');
     pages = prompt('Pages');
-    read = prompt('Read');
+    read = Boolean(+prompt('Read'));
     return addBook();
 }
 
-function displayCards() {
-    const cardContainer = document.querySelector('.card-container')
-    let i = 0;
+function displayCard(book) {
+    const cardContainer = document.querySelector('.card-container');
+    const cardItem = document.createElement('div')
+    cardItem.className = 'card'
+    cardContainer.appendChild(cardItem)
+    const titleCard = document.createElement('p');
+    const authorCard = document.createElement('p');
+    const pagesCard = document.createElement('p');
+    const readLabel = document.createElement('label');
+    const readCard = document.createElement('input');
+    readCard.type = 'checkbox';
+    readCard.name = `read${myLib.indexOf(book)}`;
+    readCard.id = `read${myLib.indexOf(book)}`;
+    readLabel.htmlFor = `read${myLib.indexOf(book)}`;
+    titleCard.textContent = book.title;
+    authorCard.textContent = book.author;
+    pagesCard.textContent = `${book.pages} Pages`;
+    readCard.checked = book.read;
+    readLabel.textContent = 'Read?';
+    cardItem.appendChild(titleCard);
+    cardItem.appendChild(authorCard);
+    cardItem.appendChild(pagesCard);
+    cardItem.appendChild(readLabel);
+    cardItem.appendChild(readCard);
+}
+
+function updateCards() {
+    const cards = document.querySelectorAll('.card')
+    cards.forEach(card => {
+        card.remove();
+    });
     myLib.forEach(book => {
-        i++;
-        const cardItem = document.createElement('div')
-        cardItem.className = 'card'
-        cardContainer.appendChild(cardItem)
-        
-        const titleCard = document.createElement('p');
-        const authorCard = document.createElement('p');
-        const pagesCard = document.createElement('p');
-        const readLabel = document.createElement('label');
-        const readCard = document.createElement('input');
-        readCard.type = 'checkbox';
-        readCard.name = `read${i}`;
-        readCard.id = `read${i}`;
-        readLabel.htmlFor = `read${i}`;
-
-        titleCard.textContent = book.title;
-        authorCard.textContent = book.author;
-        pagesCard.textContent = `${book.pages} Pages`;
-        readCard.checked = book.read;
-        readLabel.textContent = 'Read?';
-
-        cardItem.appendChild(titleCard);
-        cardItem.appendChild(authorCard);
-        cardItem.appendChild(pagesCard);
-        cardItem.appendChild(readLabel);
-        cardItem.appendChild(readCard);
+        displayCard(book);
     });
 }
 
-displayCards();
+// updateCards();
+
+// myLib[0].title = 'teste';
+
+// updateCards();
