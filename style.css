@@ -33,3 +33,26 @@ body {
   padding: 1rem;
   border-radius: 10px;
 }
+
+form {
+  background-color: yellow;
+  width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+form button {
+  width: 100px;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
