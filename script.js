@@ -13,18 +13,10 @@ let myLib = [
 ];
 
 function addBook() {
-    let newBook = new Book(title, author, pages, read);
+    let newBook = new Book(this.title, this.author, this.pages, this.read);
     myLib.push(newBook);
     displayCard(newBook);
-    return `${newBook.title} added to library`
-}
-
-function getBook() {
-    title = prompt('Title');
-    author = prompt('Author');
-    pages = prompt('Pages');
-    read = Boolean(+prompt('Read'));
-    return addBook();
+    updateCards();
 }
 
 function displayCard(book) {
@@ -63,8 +55,52 @@ function updateCards() {
     });
 }
 
+
+const formDialog = document.querySelector('.form-dialog');
+formDialog.addEventListener("click", e => {
+  const dialogDimensions = formDialog.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    formDialog.close()
+  }
+})
+
+const addButton = document.querySelector('.add-book');
+addButton.addEventListener("click", () => {
+    formDialog.showModal();
+})
+
+const submitButton = document.querySelector('.button-submit');
+submitButton.addEventListener("click", event => {
+    const titleInput = document.querySelector('input[name=title-form]')
+    const authorInput = document.querySelector('input[name=author-form]')
+    const pagesInput = document.querySelector('input[name=pages-form]')
+    const readInput = document.querySelector('input[name=read-form]')
+
+    if (titleInput.validity.valid && authorInput.validity.valid && pagesInput.validity.valid) {
+        event.preventDefault();
+        title = titleInput.value;
+        author = authorInput.value;
+        pages = pagesInput.value;
+        read = !Boolean(readInput.value);
+
+        titleInput.value = ''
+        authorInput.value = ''
+        pagesInput.value = ''
+        readInput.value = ''
+        
+        formDialog.close();
+        return addBook()
+    }
+    console.log(titleInput.validity.valid);
+})
+
 // updateCards();
 
-// myLib[0].title = 'teste';
+// delete myLib[1];
 
 // updateCards();
