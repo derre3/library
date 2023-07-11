@@ -96,7 +96,6 @@ submitButton.addEventListener("click", event => {
         formDialog.close();
         return addBook()
     }
-    console.log(titleInput.validity.valid);
 })
 
 // updateCards();
