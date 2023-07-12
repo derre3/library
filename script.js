@@ -11,6 +11,7 @@ let myLib = [
     new Book("The Hunger Games", "Suzanne Collins", 486, true),
     new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 236, false),
 ];
+updateCards();
 
 function addBook() {
     let newBook = new Book(this.title, this.author, this.pages, this.read);
@@ -22,31 +23,43 @@ function addBook() {
 function displayCard(book) {
     const cardContainer = document.querySelector('.card-container');
     const cardItem = document.createElement('div')
-    cardItem.className = 'card'
-    cardContainer.appendChild(cardItem)
     const titleCard = document.createElement('p');
     const authorCard = document.createElement('p');
     const pagesCard = document.createElement('p');
     const readLabel = document.createElement('label');
     const readCard = document.createElement('input');
-    readCard.type = 'checkbox';
-    readCard.name = `read${myLib.indexOf(book)}`;
-    readCard.id = `read${myLib.indexOf(book)}`;
-    readLabel.htmlFor = `read${myLib.indexOf(book)}`;
-    titleCard.textContent = book.title;
-    authorCard.textContent = book.author;
-    pagesCard.textContent = `${book.pages} Pages`;
-    readCard.checked = book.read;
-    readLabel.textContent = 'Read?';
+    const removeButton = document.createElement('button');
+    
+    cardContainer.appendChild(cardItem)
     cardItem.appendChild(titleCard);
     cardItem.appendChild(authorCard);
     cardItem.appendChild(pagesCard);
     cardItem.appendChild(readLabel);
     cardItem.appendChild(readCard);
+    cardItem.appendChild(removeButton)
+    
+    cardItem.className = 'card'
+    removeButton.className = 'remove-card';
+
+    titleCard.textContent = book.title;
+    authorCard.textContent = `by ${book.author}`;
+    pagesCard.textContent = `${book.pages} Pages`;
+    readLabel.textContent = 'Read?';
+    removeButton.textContent = "Remove"
+    readCard.checked = book.read;
+
+    readCard.type = 'checkbox';
+    readCard.name = `read${myLib.indexOf(book)}`;
+    readCard.id = `read${myLib.indexOf(book)}`;
+    readLabel.htmlFor = `read${myLib.indexOf(book)}`;
+
+    removeButton.addEventListener("click", ()=>{
+        removeBookCard(myLib.indexOf(book));
+    })
 }
 
 function updateCards() {
-    const cards = document.querySelectorAll('.card')
+    const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         card.remove();
     });
@@ -55,6 +68,10 @@ function updateCards() {
     });
 }
 
+function removeBookCard(bookIndex) {
+    myLib.splice(bookIndex, 1);
+    updateCards();
+}
 
 const formDialog = document.querySelector('.form-dialog');
 formDialog.addEventListener("click", e => {
@@ -86,7 +103,7 @@ submitButton.addEventListener("click", event => {
         title = titleInput.value;
         author = authorInput.value;
         pages = pagesInput.value;
-        read = !Boolean(readInput.value);
+        read = !readInput.value;
 
         titleInput.value = ''
         authorInput.value = ''
@@ -97,9 +114,3 @@ submitButton.addEventListener("click", event => {
         return addBook()
     }
 })
-
-// updateCards();
-
-// delete myLib[1];
-
-// updateCards();

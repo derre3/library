@@ -56,3 +56,8 @@ dialog {
   transform: translate(-50%, -50%);
 }
 
+.remove-card {
+  display: block;
+  width: 100px;
+  height: 50px;
+}
