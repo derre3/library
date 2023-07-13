@@ -62,6 +62,10 @@ function displayCard(book) {
     readCard.id = `read${myLib.indexOf(book)}`;
     readLabel.htmlFor = `read${myLib.indexOf(book)}`;
 
+    readCard.addEventListener("click", ()=> {
+        changeReadStatus(myLib.indexOf(book));
+    })
+
     removeButton.addEventListener("click", ()=>{
         removeBookCard(myLib.indexOf(book));
     })
@@ -76,6 +80,12 @@ function updateCards() {
     myLib.forEach(book => {
         displayCard(book);
     });
+}
+
+function changeReadStatus(bookIndex) {
+    myLib[bookIndex].read === true 
+        ? myLib[bookIndex].read = false
+        : myLib[bookIndex].read = true
 }
 
 function removeBookCard(bookIndex) {
