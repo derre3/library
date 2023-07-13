@@ -23,23 +23,32 @@ function addBook() {
 function displayCard(book) {
     const cardContainer = document.querySelector('.card-container');
     const cardItem = document.createElement('div')
+    const bookInfo = document.createElement('div');
     const titleCard = document.createElement('p');
     const authorCard = document.createElement('p');
     const pagesCard = document.createElement('p');
+    const readContainer = document.createElement('div');
+    const bookMisc = document.createElement('div');
     const readLabel = document.createElement('label');
     const readCard = document.createElement('input');
     const removeButton = document.createElement('button');
     
     cardContainer.appendChild(cardItem)
-    cardItem.appendChild(titleCard);
-    cardItem.appendChild(authorCard);
-    cardItem.appendChild(pagesCard);
-    cardItem.appendChild(readLabel);
-    cardItem.appendChild(readCard);
-    cardItem.appendChild(removeButton)
+    readContainer.appendChild(readLabel);
+    readContainer.appendChild(readCard);
+    bookInfo.appendChild(titleCard);
+    bookInfo.appendChild(authorCard);
+    bookInfo.appendChild(pagesCard);
+    cardItem.appendChild(bookInfo);
+    bookMisc.appendChild(readContainer);
+    bookMisc.appendChild(removeButton)
+    cardItem.appendChild(bookMisc);
     
     cardItem.className = 'card'
     removeButton.className = 'remove-card';
+    bookInfo.className = 'book-info';
+    bookMisc.className = 'book-misc';
+    readContainer.className = 'read-container';
 
     titleCard.textContent = book.title;
     authorCard.textContent = `by ${book.author}`;
