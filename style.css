@@ -113,25 +113,69 @@ button {
   cursor: pointer;
 }
 
+dialog,
 form {
-  background-color: yellow;
-  width: 300px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-form button {
-  width: 100px;
+  border-style: none;
+  border-radius: 10px;
 }
 
 dialog {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.464);
+}
+
+form {
+  flex-direction: column;
+  padding: 32px 24px;
+  background-color: #fefefe;
+  width: 300px;
+  height: 350px;
+}
+
+form input {
+  height: 1.5rem;
+  padding-left: 0.5ch;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+form > div:nth-child(4) {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+form button {
+  height: 35px;
+  border-style: none;
+  border-radius: 5px;
+}
+
+.button-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+form button:nth-child(1) {
+  width: 200px;
+}
+
+form button:nth-child(1):hover {
+  background-color: rgb(105, 220, 101);
+  width: 200px;
+  cursor: pointer;
+  transition: 250ms;
 }
 
 footer {
