@@ -4,25 +4,62 @@
   padding: 0;
 }
 
-body {
-  height: 100svh;
+body,
+button {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
 }
 
 .header {
-  background-color: red;
-  height: 15%;
+  background-color: #fefefe;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 5rem;
+  height: 75px;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.button-wrapper > button {
+  width: 9rem;
+  height: 33px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #efefef;
+  cursor: pointer;
+}
+
+.button-wrapper > button:hover {
+  transition: 250ms;
+  background-color: #e5e5e5;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .main {
-  background-color: blue;
-  height: 85%;
+  background-color: #efefef;
+  flex: 1;
+  border-bottom: solid;
+  border-top: solid;
+  border-color: #e4e4e4;
 }
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 1.5rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  row-gap: 5vh;
+  justify-content: center;
 }
 
 .card {
@@ -32,6 +69,7 @@ body {
   color: black;
   padding: 1rem;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 form {
@@ -62,10 +100,11 @@ dialog {
 }
 
 footer {
-  height: 40px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fefefe;
 }
 
 svg {
