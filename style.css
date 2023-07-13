@@ -2,10 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body,
-button {
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -15,6 +11,7 @@ button {
   min-height: 100svh;
 }
 
+/* HEADER */
 .header {
   background-color: #fefefe;
   display: flex;
@@ -47,6 +44,7 @@ button {
 
 }
 
+/* MAIN */
 .main {
   background-color: #efefef;
   flex: 1;
@@ -104,6 +102,7 @@ button {
   height: 50px;
   padding: 10px;
   border-radius: 10px;
+  font-size: 0.9rem;
 }
 
 .remove-card:hover {
@@ -113,6 +112,7 @@ button {
   cursor: pointer;
 }
 
+/* DIALOG */
 dialog,
 form {
   border-style: none;
@@ -158,6 +158,7 @@ form button {
   height: 35px;
   border-style: none;
   border-radius: 5px;
+  font-size: 0.9rem;
 }
 
 .button-form {
@@ -178,6 +179,8 @@ form button:nth-child(1):hover {
   transition: 250ms;
 }
 
+
+/* FOOTER */
 footer {
   height: 50px;
   display: flex;

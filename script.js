@@ -67,6 +67,7 @@ function displayCard(book) {
     })
 }
 
+// update cards onscreen by removing them from the DOM first and then check myLib[]
 function updateCards() {
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
@@ -82,6 +83,7 @@ function removeBookCard(bookIndex) {
     updateCards();
 }
 
+// closes the form dialog if you click outside of it
 const formDialog = document.querySelector('.form-dialog');
 formDialog.addEventListener("click", e => {
   const dialogDimensions = formDialog.getBoundingClientRect()
@@ -100,6 +102,7 @@ addButton.addEventListener("click", () => {
     formDialog.showModal();
 })
 
+// form validation 
 const submitButton = document.querySelector('.button-submit');
 submitButton.addEventListener("click", event => {
     const titleInput = document.querySelector('input[name=title-form]')
