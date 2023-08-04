@@ -153,7 +153,6 @@ const domStuff = (() => {
   const updateCards = () => {
     const cards = document.querySelectorAll(".card");
     let myLib = library.getLib();
-    console.log(myLib);
     cards.forEach((card) => {
       card.remove();
     });
