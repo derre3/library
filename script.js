@@ -29,7 +29,6 @@ const library = (() => {
   const addBook = () => {
     let newBook = new Book(this.title, this.author, this.pages, this.read);
     myLib.push(newBook);
-    domStuff.displayCard(newBook);
     domStuff.updateCards();
   };
 
