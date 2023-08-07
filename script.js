@@ -55,12 +55,11 @@ const domStuff = (() => {
       title = titleInput.value;
       author = authorInput.value;
       pages = pagesInput.value;
-      read = readInput.value;
+      read = readInput.checked;
 
       titleInput.value = "";
       authorInput.value = "";
       pagesInput.value = "";
-      readInput.value = "";
 
       formDialog.close();
       return Book.addBook();
@@ -119,7 +118,7 @@ const domStuff = (() => {
     pagesCard.textContent = `${book.pages} Pages`;
     readLabel.textContent = "Read?";
     removeButton.textContent = "Remove";
-    readCard.checked = !book.read;
+    readCard.checked = book.read;
 
     readCard.type = "checkbox";
     readCard.name = `read${library.indexOf(book)}`;
