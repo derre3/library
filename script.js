@@ -1,4 +1,26 @@
 class Book {
+  static library = [
+    new Book("The Lightning Thief", "Rick Riordan", 384, false),
+    new Book("The Hunger Games", "Suzanne Collins", 486, true),
+    new Book(
+      "Harry Potter and the Philosopher's Stone",
+      "J.K. Rowling",
+      236,
+      false
+    ),
+  ];
+
+  static addBook() {
+    let newBook = new Book(title, author, pages, read);
+    Book.library.push(newBook);
+    domStuff.updateCards();
+  }
+
+  static removeBook(bookIndex) {
+    Book.library.splice(bookIndex, 1);
+    domStuff.updateCards();
+  }
+
   constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -10,39 +32,6 @@ class Book {
     this.read === true ? (this.read = false) : (this.read = true);
   }
 }
-
-const library = (() => {
-  // placeholder books
-  let myLib = [
-    new Book("The Lightning Thief", "Rick Riordan", 384, false),
-    new Book("The Hunger Games", "Suzanne Collins", 486, true),
-    new Book(
-      "Harry Potter and the Philosopher's Stone",
-      "J.K. Rowling",
-      236,
-      false
-    ),
-  ];
-
-  const getLib = () => myLib;
-
-  const addBook = () => {
-    let newBook = new Book(this.title, this.author, this.pages, this.read);
-    myLib.push(newBook);
-    domStuff.updateCards();
-  };
-
-  const removeBook = (bookIndex) => {
-    myLib.splice(bookIndex, 1);
-    domStuff.updateCards();
-  };
-
-  return {
-    addBook,
-    removeBook,
-    getLib,
-  };
-})();
 
 const domStuff = (() => {
   // queries
@@ -66,7 +55,7 @@ const domStuff = (() => {
       title = titleInput.value;
       author = authorInput.value;
       pages = pagesInput.value;
-      read = !readInput.value;
+      read = readInput.value;
 
       titleInput.value = "";
       authorInput.value = "";
@@ -74,7 +63,7 @@ const domStuff = (() => {
       readInput.value = "";
 
       formDialog.close();
-      return library.addBook();
+      return Book.addBook();
     }
   });
   addButton.addEventListener("click", () => {
@@ -94,7 +83,7 @@ const domStuff = (() => {
   });
 
   const displayCard = (book) => {
-    let myLib = library.getLib();
+    let library = Book.library;
 
     const cardContainer = document.querySelector(".card-container");
     const cardItem = document.createElement("div");
@@ -130,29 +119,29 @@ const domStuff = (() => {
     pagesCard.textContent = `${book.pages} Pages`;
     readLabel.textContent = "Read?";
     removeButton.textContent = "Remove";
-    readCard.checked = book.read;
+    readCard.checked = !book.read;
 
     readCard.type = "checkbox";
-    readCard.name = `read${myLib.indexOf(book)}`;
-    readCard.id = `read${myLib.indexOf(book)}`;
-    readLabel.htmlFor = `read${myLib.indexOf(book)}`;
+    readCard.name = `read${library.indexOf(book)}`;
+    readCard.id = `read${library.indexOf(book)}`;
+    readLabel.htmlFor = `read${library.indexOf(book)}`;
 
     readCard.addEventListener("click", () => {
       book.changeReadStatus();
     });
 
     removeButton.addEventListener("click", () => {
-      library.removeBook(myLib.indexOf(book));
+      Book.removeBook(library.indexOf(book));
     });
   };
-  // update cards onscreen by removing them from the DOM first and then check myLib[]
+  // update cards onscreen by removing them from the DOM first and then check library[]
   const updateCards = () => {
     const cards = document.querySelectorAll(".card");
-    let myLib = library.getLib();
+    let library = Book.library;
     cards.forEach((card) => {
       card.remove();
     });
-    myLib.forEach((book) => {
+    library.forEach((book) => {
       displayCard(book);
     });
   };
