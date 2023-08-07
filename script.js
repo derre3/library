@@ -5,6 +5,10 @@ class Book {
     this.pages = pages;
     this.read = read;
   }
+
+  changeReadStatus() {
+    this.read === true ? (this.read = false) : (this.read = true);
+  }
 }
 
 const library = (() => {
@@ -29,22 +33,15 @@ const library = (() => {
     domStuff.updateCards();
   };
 
-  const removeBookCard = (bookIndex) => {
+  const removeBook = (bookIndex) => {
     myLib.splice(bookIndex, 1);
     domStuff.updateCards();
   };
 
-  const changeReadStatus = (bookIndex) => {
-    myLib[bookIndex].read === true
-      ? (myLib[bookIndex].read = false)
-      : (myLib[bookIndex].read = true);
-  };
-
   return {
     addBook,
-    removeBookCard,
+    removeBook,
     getLib,
-    changeReadStatus,
   };
 })();
 
@@ -142,11 +139,11 @@ const domStuff = (() => {
     readLabel.htmlFor = `read${myLib.indexOf(book)}`;
 
     readCard.addEventListener("click", () => {
-      library.changeReadStatus(myLib.indexOf(book));
+      book.changeReadStatus();
     });
 
     removeButton.addEventListener("click", () => {
-      library.removeBookCard(myLib.indexOf(book));
+      library.removeBook(myLib.indexOf(book));
     });
   };
   // update cards onscreen by removing them from the DOM first and then check myLib[]
